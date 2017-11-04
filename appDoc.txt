@@ -1,0 +1,66 @@
+//set up the project
+//npm init
+//npm install request@2.83.0 --save
+
+//go to this url => google map api => we are giving adress in url => you will get json => we installed jsonView extension
+//https://maps.googleapis.com/maps/api/geocode/json?address=1301%20lombard%20street%20philadelphia
+//see request documentation - https://www.npmjs.com/package/request
+const yargs = require('yargs');
+const request = require('request');
+//request helps to get data from internet using HTTP request (important )
+//read documentation (find this  "json:true" in documentation) => we will be using this syntax as shown below
+// request( object with {url + json true} , callback which will recieve error, respinse and body according to doc ) =>
+
+//lets get address from user using yargs
+var argv = yargs
+          .options({
+            a : {
+              demand : true,
+              alias : 'address',
+              describe : 'Address of the user',
+              string : true
+            }
+          })
+          .help()
+          .alias('help','h')
+          .argv;
+var add = argv.a;
+var encodedadd = encodeURIComponent(add);
+var address = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodedadd;
+request (
+  {  //this is object with url and json treu
+    url: address,
+    json: true //by this we are telling that it is in json and thus give us the object by converting json to object
+  },
+(error,response,body) => {   //this is callback function
+  // console.log(body); if you print like this => terminal will cut it as it is too big to render properly
+  // console.log(   JSON.stringify(body,undefined,2)); //here WHILE PRINTING => we told it to convert object back to json but with 2 spaces
+  //i.e. it will beutify the output string by 2 spaces => now whole output will be printed as a string => preety print
+
+
+// console.log(   JSON.stringify(body,undefined,2)); //what does response contains => response is parent of body. While body is main data/content, reposnse also contain other meta data along with body
+//this includes status code: 404,200, etc
+//body
+//headers => these are set by API provider...we don't do/set them
+//request => this is we can change/set according to our demands => tells what request we made and includes -
+//uri - url, protocol, hash etc
+//method - get, post, etc
+//headers - that can be set by us For ex - we set json = true
+
+//Now lets print the logitude and lang, adress of first result in body
+//how to parse => go to jsonViewer and select line you want => you will get its value at bottom
+if(error){
+  console.log('Unable to connect');
+}else if(body.status === 'ZERO_RESULTS'){
+  console.log('Wrong Address');
+}else if(body.status === 'OK'){
+  console.log(body.results[0].geometry.location.lat);
+  console.log(body.results[0].geometry.location.lat);
+  console.log(body.results[0].formatted_address);
+}else{
+  console.log('Something went wrong');
+}
+
+}
+);
+//and yup, its working
