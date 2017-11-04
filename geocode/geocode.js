@@ -1,6 +1,8 @@
 const request = require('request');
 
-var getData = (address) => {
+//here also making getData function to take callback function
+var getData = (address, callback) => {
+
   request (
     {
       url: address,
@@ -8,18 +10,20 @@ var getData = (address) => {
     },
   (error,response,body) => {
   if(error){
-    console.log('Unable to connect');
+    callback('Unable to Connect',undefined);
   }else if(body.status === 'ZERO_RESULTS'){
-    console.log('Wrong Address');
+    callback('Wrong Address');
   }else if(body.status === 'OK'){
-    console.log(body.results[0].geometry.location.lat);
-    console.log(body.results[0].geometry.location.lat);
-    console.log(body.results[0].formatted_address);
+    callback(undefined, {
+      longitude : body.results[0].geometry.location.lng,
+      latitude : body.results[0].geometry.location.lat,
+      address : body.results[0].formatted_address
+    });
   }else{
-    console.log('Something went wrong');
+    callback('Something went wrong');
   }
-  }
-  );
+});
+
 };
 
 module.exports = {getData};
