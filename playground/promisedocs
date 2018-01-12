@@ -9,3 +9,5 @@ then take 2 arguments which are both callbacks...first callback id called if res
 
 
 if the promise is resolced or rejected once..it cant be resolved or rejected again => it ensures that we are calling callback just once i.e. sometimes callback gets called twice and creates problem
+
+Now, let's see how to use promises full fledge i.e. with arguments and how it makes everything simple
