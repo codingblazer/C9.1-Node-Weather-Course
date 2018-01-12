@@ -1,0 +1,5 @@
+npm install axios --save => alternate to request library..unlike request it has promises inbuilt
+
+in axios, use simply then and catch for error => if let you found that there is error in then => you can throw error => control will pass to catch block and mesage given by you will be passed to this catch block
+
+see the code for this in screenshot present in weather app
