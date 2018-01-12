@@ -11,3 +11,6 @@ then take 2 arguments which are both callbacks...first callback id called if res
 if the promise is resolced or rejected once..it cant be resolved or rejected again => it ensures that we are calling callback just once i.e. sometimes callback gets called twice and creates problem
 
 Now, let's see how to use promises full fledge i.e. with arguments and how it makes everything simple
+
+Now, we will see chanining of promises => In weather app, we had 2 request call sequentially which made everything in code messy => we can also chain the promises which make sequential calls neat and abstracted
+=> In chaining, we use catch methods => then only take one callback corresponding to success and first then returned the next promise => carry on by using "then" again. Since we are not giving error callback in "then" => we actually give it at end inside catch => catch will catch the first error that happends and show us
