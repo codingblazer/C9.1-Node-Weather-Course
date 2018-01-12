@@ -1,0 +1,11 @@
+included in ES6 javascript
+promise is used to do asynch task => DB/HTTP => when it has done the asych tasks, it has made a promise to do that for you without you knowing how i.e. abstraction
+=> the promise then calls reject and resolve to tell whether promise is fulfilled or not
+it's totally like function in geocde.js => it make asych request and returns eiether result or err message and is fully abstracted from app.js
+
+=> Inside promise we can call resolved or rejected => then function is called with the results
+=> promises remove all the if else statements and make code neat
+then take 2 arguments which are both callbacks...first callback id called if resolved and 2nd callback is called if rejected.
+
+
+if the promise is resolced or rejected once..it cant be resolved or rejected again => it ensures that we are calling callback just once i.e. sometimes callback gets called twice and creates problem
